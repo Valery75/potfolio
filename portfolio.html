@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        *, *::after, *::before {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 1080px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            color: #333;
+            margin: 0 auto;
+            background-color: lightgray;
+        }
+
+        .container {
+            height: 100vh;
+        }
+
+        .main-header {
+            background-image: url(site/bg.jpg);
+            background-size: cover;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            overflow: hidden;
+            min-height: 8vh;
+            background-color: #1b1112;
+        }
+        .logo {
+            color: rgb(225, 225, 225);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 20px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            width: 30%;
+        }
+        .nav-links li {
+            list-style: none;
+            margin-right: 10px;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 20px 0;
+            color: rgb(225, 225, 225);
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-size: 24px;
+        }
+        .nav-links a:hover {
+            color: rgb(225, 225, 225);
+            background-color: rgba(128, 128, 128, 0.751);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: rgb(225, 225, 225);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        @media screen and (max-width:768px) {
+            .nav-links {
+                width: 50%;
+            }
+        }
+        @media screen and (max-width:768px) {
+            body {
+                overflow-x: hidden;
+            }
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                height: 92vh;
+                top: 8vh;
+                background-color: #1b1112;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 30%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+            }
+            .nav-links li {
+                opacity: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        .nav-active {
+            transform: translateX(0%);
+        }
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px,6px);
+        }
+        .toggle .line2 {
+            opacity: 0;
+        }
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px,-6px);
+        }
+        h1 {
+            position: relative;
+            left: 150px;
+            top: 450px;
+            font-size: 42px;
+            color: rgb(235, 241, 244);
+            line-height: 50px;
+        }
+        h2 {
+            padding-top: 10px;
+            font-size: 32px;
+            padding-bottom: 20px;
+            line-height: 40px;
+
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 24px;
+        }
+        span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .header-top {
+            display: flex;
+            flex-wrap: wrap; /*перенос строки */
+            justify-content: flex-end; /*прижимает содержимое к краям */
+            align-items: stretch; /*выравнивает элементы по центру на вертикальной */
+        }
+
+/*
+        .header-top .main-menu ul {
+            display: flex;
+            list-style: none;
+        }
+        .header-top .main-menu ul li {
+            margin: 10px 0;
+        }
+        .header-top .main-menu ul a {
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 24px;
+            color: #fdeba8;
+            padding: 20px 20px 10px 20px;
+            background-color: #1b1112;
+        }
+        .header-top .main-menu ul a:hover {
+            background-color: rgb(113, 109, 109);
+            color: #fcb612;
+        }
+
+        @media screen and (max-width: 900px) {
+            .phone {
+                margin: auto;
+            }
+        }
+        @media screen and (max-width: 500px) {
+            .header-top  {
+                flex-direction: column;
+            }
+
+            .header-top .main-menu ul {
+                flex-direction: column;
+                align-self: center;
+            }
+            .header-top .main-menu ul li {
+                margin: 5px;
+            }
+        }*/
+        .about-content {
+            background-color: gainsboro;
+            display: block;
+        }
+        .box1 {
+            position: relative;
+            top: 280px;
+            left: 400px;
+            width: 250px;
+            height: 250px;
+            z-index: 2;
+        }
+        .box2 {
+            position: relative;
+            left: 50px;
+            top: -50px;
+            height: 350px;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            display: block;
+            left: 900px;
+            bottom: 400px;
+            width: 350px;
+        }
+
+        .open-window {
+            margin-bottom: 10px;
+            background-color: #e7e7e7;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+        .project1 .open-window {
+            position: relative;
+            left: 10px;
+
+        }
+        .project2 .open-window {
+            position: relative;
+            right: -200px;
+
+        }
+
+        .content h2 {
+            padding-left: 20px;
+            margin-bottom: 20px;
+
+        }
+        .project1 + p {
+            position: relative;
+            left: -350px;
+            bottom: 50px;
+            font-size: 20px;
+            font-weight: 500;
+            z-index: 2;
+        }
+        .project2 + p {
+            position: relative;
+            left: 970px;
+            bottom: 710px;
+            font-size: 20px;
+            font-weight: 500;
+            z-index: 2;
+        }
+        .potfolio-content {
+            padding-top: 30px;
+            background-color: rgb(240, 240, 240);
+            text-align: center;
+            min-height: 100vh;
+        }
+        .project {
+            width: 550px;
+            height: 500px;
+            margin: 10px;
+        }
+        .project1 {
+            /*float: left;*/
+            position: relative;
+            left: -350px;
+
+        }
+        .project2 {
+            /*float: left;*/
+            position: relative;
+            left: 750px;
+            bottom: 650px;
+            z-index: 0;
+
+
+        }
+        .potfolio-content::after {
+            display: table;
+            clear: both;
+            content: "";
+        }
+
+        .contacts-content {
+            background-color: whitesmoke;
+            text-align: center;
+            padding-top: 80px;
+            padding-bottom: 100px;
+            min-height: 60vh;
+        }
+        .contacts-content p {
+            display: inline-block;
+            width: 520px;
+            font-size: 24px;
+            line-height: 32px;
+        }
+        .social {
+            display: block;
+            margin-top: 50px;
+        }
+        .social img {
+            margin-right: 10px;
+        }
+        .footer {
+            min-height: 100px;
+            background-color: #1b1112;
+            font-size: 24px;
+            color: #fdeba8;
+            text-align: center;
+            vertical-align: middle;
+            padding-bottom: 20px;
+        }
+        /*                                      Стилизация модального окна*/
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: 200ms ease-in-out;
+            border: 1px solid black;
+            border-radius: 10px;
+            z-index: 999;
+            background-color: white;
+            width: 550px;
+            max-width: 80%;
+            text-align: center;
+            font-size: 18px;
+            line-height: 28px;
+            padding: 10px;
+        }
+
+        .modal.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            margin: 10px 170px;
+            display: flex;
+        }
+
+        .modal-header .title {
+            font-size: 2.25rem;
+            font-weight: bold;
+        }
+
+        .modal .close-button {
+            cursor: pointer;
+            outline: none;
+            font-size: 1.75rem;
+            font-weight: bold;
+            background-color: #181616;
+            color: #f5f5f5;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            border: #181616 solid 2px;
+            border-radius: 8px ;
+        }
+
+        .modal-body {
+            padding: 10px 15px;
+        }
+
+        #overlay {
+            position: fixed;
+            opacity: 0;
+            transition: 200ms ease-in-out;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, .5);
+            pointer-events: none;
+        }
+
+        #overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header class="main-header">
+    <div class="container">
+        <div class="header-top area">
+            <nav>
+                <div class="logo">
+                    <h4>VN</h4>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">About me</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contacts">Contacts</a></li>
+                    <li><a href="#home">Home</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+        <div class="promo">
+            <div class="promo-title"><h1>Valery Nemo, <br>Front-end developer</h1></div>
+
+        </div>
+    </div>
+</header>
+<section id="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="box box1">
+                <img src="site/person.jpeg" alt="Me"class="box box2">
+            </div>
+            <div class="box box2">
+                <img src="site/image.jpg" alt="Me"class="box box2">
+            </div>
+            <div class="content">
+                <h2 >About me</h2>
+                <p>Hi. I`m Valery Nemo. I`ve been a junior front-end developer for 5 months now.</p>
+                <p> For me, programming is not a job, it`s a hobby.</p>
+                <p>I`m open to new knowiedge. I like to stody new technologies and apply them in practice.</p>
+                <p><span>Skills:</span> HTML, CSS, JS, React. </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="portfolio">
+    <div class="container">
+        <div class="potfolio-content">
+            <h2 class="portfolio-title">Portfolio</h2>
+            <div class="project1">
+                <div class="window">
+                <button data-modal-target="#modal" class="open-window">Flashcards</button>
+                <div class="modal" id="modal">
+                    <div class="modal-header">
+                        <div class="title">Flashcards</div>
+                    </div>
+                    <div class="modal-body">
+                        You can see the project at the following link: <a href="#">flashcards</a>. I did this project when i was studying the frontend on HyperSkill. I created a web  page with flip-down flash cards, learned some HTML basics and learned that CSS can easily make a beautiful design.
+                    </div>
+                    <button data-close-button class="close-button">Close</button>
+                </div>
+                <div id="overlay"></div>
+            </div>
+            </div>
+            <img src="site/project1.png" alt="Flashcards" class="project project1">
+            <p>Flashcards</p>
+        </div>
+        <div class="project2">
+            <button data-modal-target="#modal" class="open-window">Flashcards</button>
+            <div class="modal" id="modal1">
+                <div class="modal-header">
+                    <div class="title">Virtual Piano</div>
+                </div>
+                <div class="modal-body">
+                    You can see the project at the following link: <a href="#">"virtual Piano"</a>. I did this project when i was studying the frontend on HyperSkill. I created a web  page with flip-down flash cards, learned some HTML basics and learned that CSS can easily make a beautiful design.
+                </div>
+                <button data-close-button class="close-button">Close</button>
+            </div>
+            <div id="overlay"></div>
+        </div>
+        <img src="site/project2.png" alt="Virtual Piano" class="project project2">
+        <p>Virtual Piano</p>
+    </div>
+    </div>
+    </div>
+</section>
+    <section id="contacts">
+        <div class="">
+            <div class="contacts-content">
+                <h2>Contacts</h2>
+                <p>
+                    You can contact me at <a href="mailto:">valerynemo@gmail.com</a>  or phone number - <a href="tel:">+123456789</a>.
+                </p>
+                <div class="social">
+                    <img src="site/github.svg" alt="Github">
+                    <img src="site/facebook.svg" alt="Facebook">
+                    <img src="site/twitter.svg" alt="Twitter">
+                    <img src="site/instagram 1.svg" alt="Instagram">
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer">
+            <div class="">
+                <h2>Valery Nemo</h2>
+                <p>2022</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const navSlide = () => {
+            const burger = document.querySelector('.hamburger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+
+            burger.addEventListener('click', () => {
+                //Tuggle Nav
+                nav.classList.toggle('nav-active');
+
+                //Animate links
+                navLinks.forEach((link, index)=>{
+                    if (link.style.animation) {
+                        link.style.animation = ''
+                    }
+                    else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index/7+0.5}s`
+                    }
+                });
+                //Burger Animation
+                burger.classList.toggle('toggle');
+            })
+        }
+        navSlide();
+
+        const openModalButtons = document.querySelectorAll('.open-window')
+        const closeModalButtons = document.querySelectorAll('.close-button')
+        const overlay = document.getElementById('overlay')
+
+
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.querySelector(button.dataset.modalTarget)
+                openModal(modal)
+            })
+        })
+
+        overlay.addEventListener('click', () => {
+            const modals = document.querySelectorAll('.modal.active')
+            modals.forEach(modal => {
+                closeModal(modal)
+            })
+        })
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.modal')
+                closeModal(modal)
+            })
+        })
+
+        function openModal(modal) {
+            if (modal == null) return
+            modal.classList.add('active')
+            overlay.classList.add('active')
+        }
+
+        function closeModal(modal) {
+            if (modal == null) return
+            modal.classList.remove('active')
+            overlay.classList.remove('active')
+        }
+
+    </script>
+</body>
+</html>
